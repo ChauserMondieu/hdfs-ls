@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <property>
+    <name>fs.trash.interval</name>
+    <value>10080</value>
+  </property>
+  <property>
+    <name>dfs.client.block.write.locateFollowingBlock.retries</name>
+    <value>8</value>
+  </property>
+  <property>
+    <name>dfs.offline.nameservices.nmg</name>
+    <value>
+    difed,DClusterNmg,DClusterNmg2,DClusterNmg3,DClusterNmg4,DClusterNmg5,DClusterNmg6,ys-compute,ys-computepre,gz-kylin,NMG02-HDFS-NS1,gps-storage,DClusterSHUYI,DClusterWh
+    </value>
+  </property>
+  <property>
+    <name>dfs.nameservices</name>
+    <value>${dfs.offline.nameservices.nmg}</value>
+  </property>
+  <property>
+    <name>dfs.ha.namenodes.difed</name>
+    <value>r1,r2,r3,r4,r5,r6</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.difed.r1</name>
+    <value>bigdata-nmg-hdpnn02.nmg01:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.difed.r2</name>
+    <value>bigdata-nmg-hdpnn12.nmg01:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.difed.r3</name>
+    <value>bigdata-nmg-hdpnn22.nmg01:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.difed.r4</name>
+    <value>bigdata-nmg-hdpnn32.nmg01:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.difed.r5</name>
+    <value>bigdata-nmg-hdpnn42.nmg01:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.difed.r6</name>
+    <value>bigdata-nmg-hdpnn52.nmg01:8888</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.difed</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <property>
+    <name>dfs.ha.namenodes.DClusterNmg</name>
+    <value>nn1,nn2</value>
+  </property>
+  <property>
+    <name>dfs.ha.namenodes.DClusterNmg2</name>
+    <value>nn11,nn12</value>
+  </property>
+  <property>
+    <name>dfs.ha.namenodes.DClusterNmg3</name>
+    <value>nn21,nn22</value>
+  </property>
+  <property>
+    <name>dfs.ha.namenodes.DClusterNmg4</name>
+    <value>nn31,nn32</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg.nn1</name>
+    <value>bigdata-nmg-hdpnn00.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg.nn2</name>
+    <value>bigdata-nmg-hdpnn01.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.DClusterNmg</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg2.nn11</name>
+    <value>bigdata-nmg-hdpnn10.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg2.nn12</name>
+    <value>bigdata-nmg-hdpnn11.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.DClusterNmg2</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <!--ns3-->
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg3.nn21</name>
+    <value>bigdata-nmg-hdpnn20.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg3.nn22</name>
+    <value>bigdata-nmg-hdpnn21.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.DClusterNmg3</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <!--ns4-->
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg4.nn31</name>
+    <value>bigdata-nmg-hdpnn30.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg4.nn32</name>
+    <value>bigdata-nmg-hdpnn31.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.DClusterNmg4</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <!-- ys-compute -->
+  <property>
+    <name>dfs.ha.namenodes.ys-compute</name>
+    <value>nn1,nn2</value>
+    <description>Unique identifiers for each NameNode in thenameservice</description>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.ys-compute.nn2</name>
+    <value>bigdata-hbase-master01.ys:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.ys-compute.nn1</name>
+    <value>bigdata-hbase-master00.ys:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.ys-compute</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <!-- ns5 -->
+  <property>
+    <name>dfs.ha.namenodes.DClusterNmg5</name>
+    <value>nn41,nn42</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg5.nn41</name>
+    <value>bigdata-nmg-hdpnn40.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg5.nn42</name>
+    <value>bigdata-nmg-hdpnn41.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.DClusterNmg5</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+<!-- ns6 -->
+  <property>
+    <name>dfs.ha.namenodes.DClusterNmg6</name>
+    <value>nn51,nn52</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg6.nn51</name>
+    <value>bigdata-nmg-hdpnn50.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.DClusterNmg6.nn52</name>
+    <value>bigdata-nmg-hdpnn51.nmg01:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.DClusterNmg6</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <!-- pre ys-computepre -->
+  <property>
+    <name>dfs.ha.namenodes.ys-computepre</name>
+    <value>nn1,nn2</value>
+    <description>Unique identifiers for each NameNode in thenameservice</description>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.ys-computepre.nn2</name>
+    <value>bigdata-hbasepre-master01.ys:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.ys-computepre.nn1</name>
+    <value>bigdata-hbasepre-master00.ys:8020</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.ys-computepre</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+  <!-- gz-kylin -->
+  <property>
+    <name>dfs.ha.namenodes.gz-kylin</name>
+    <value>nn1,nn2</value>
+    <description>Unique identifiers for each NameNode in thenameservice</description>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.gz-kylin.nn2</name>
+    <value>bigdata-kylin-master01.ys:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.gz-kylin.nn1</name>
+    <value>bigdata-kylin-master00.ys:8020</value>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address.gz-kylin.nn2</name>
+    <value>bigdata-kylin-master01.ys:50070</value>
+  </property>
+  <property>
+    <name>dfs.namenode.http-address.gz-kylin.nn1</name>
+    <value>bigdata-kylin-master00.ys:50070</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.proxy.provider.gz-kylin</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+ <!-- NMG02-HDFS-NS1 -->
+  <property>
+      <name>dfs.ha.namenodes.NMG02-HDFS-NS1</name>
+      <value>nn1,nn2</value>
+  </property>
+  <property>
+      <name>dfs.namenode.rpc-address.NMG02-HDFS-NS1.nn1</name>
+      <value>bigdata-nmgv3-hdpnn01.nmg02:8020</value>
+  </property>
+  <property>
+      <name>dfs.namenode.rpc-address.NMG02-HDFS-NS1.nn2</name>
+      <value>bigdata-nmgv3-hdpnn02.nmg02:8020</value>
+  </property>
+  <property>
+      <name>dfs.client.failover.proxy.provider.NMG02-HDFS-NS1</name>
+      <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+
+  <property>
+    <name>dfs.client.read.shortcircuit</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>dfs.domain.socket.path</name>
+    <value>/var/lib/hadoop-hdfs/dn_socket</value>
+  </property>
+  <property>
+    <name>dfs.blocksize</name>
+    <value>268435456</value>
+  </property>
+  <property>
+    <name>dfs.client.failover.random.order</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>dfs.client.federation.router.enable</name>
+    <value>true</value>
+    <description>The client get the rbf nameservice according to this flag. If dfs.client.federation.router.ns is not set, the fs.defaultFS will be used.</description>
+  </property>
+  <property>
+    <name>dfs.client.federation.router.ns</name>
+    <value>difed</value>
+  </property>
+<!-- gps-storage -->
+<property>
+     <name>dfs.ha.namenodes.gps-storage</name>
+     <value>nn1,nn2</value>
+    <description>Unique identifiers for each NameNode in thenameservice</description>
+</property>
+<property>
+    <name>dfs.namenode.rpc-address.gps-storage.nn2</name>
+    <value>bigdata-gps-master01.ys:8020</value>
+</property>
+<property>
+     <name>dfs.namenode.rpc-address.gps-storage.nn1</name>
+     <value>bigdata-gps-master00.ys:8020</value>
+</property>
+<property>
+     <name>dfs.namenode.http-address.gps-storage.nn2</name>
+    <value>bigdata-gps-master01.ys:50070</value>
+</property>
+<property>
+     <name>dfs.namenode.http-address.gps-storage.nn1</name>
+    <value>bigdata-gps-master00.ys:50070</value>
+</property>
+<property>
+   <name>dfs.client.failover.proxy.provider.gps-storage</name>
+   <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+
+<!-- DClusterSHUYI -->
+  <property>
+      <name>dfs.ha.namenodes.DClusterSHUYI</name>
+      <value>nn1,nn2</value>
+  </property>
+  <property>
+      <name>dfs.namenode.rpc-address.DClusterSHUYI.nn1</name>
+      <value>bigdata-shuyi-hdpnn00.nmg01:8020</value>
+  </property>
+  <property>
+      <name>dfs.namenode.rpc-address.DClusterSHUYI.nn2</name>
+      <value>bigdata-shuyi-hdpnn01.nmg01:8020</value>
+  </property>
+  <property>
+      <name>dfs.client.failover.proxy.provider.DClusterSHUYI</name>
+      <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+
+<!-- DClusterWh -->
+  <property>
+      <name>dfs.ha.namenodes.DClusterWh</name>
+      <value>nn1,nn2</value>
+  </property>
+  <property>
+      <name>dfs.namenode.rpc-address.DClusterWh.nn1</name>
+      <value>bigdata-wh-hdpnn00.wh01:8020</value>
+  </property>
+  <property>
+      <name>dfs.namenode.rpc-address.DClusterWh.nn2</name>
+      <value>bigdata-wh-hdpnn01.wh01:8020</value>
+  </property>
+  <property>
+      <name>dfs.client.failover.proxy.provider.DClusterWh</name>
+      <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+<!-- mapred specified content -->
+  <property>
+    <name>dfs.checksum.combine.mode</name>
+    <value>COMPOSITE_CRC</value>
+  </property>
+</configuration>

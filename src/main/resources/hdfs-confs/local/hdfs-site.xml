@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. See accompanying LICENSE file.
+-->
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+<property>
+        <name>dfs.nameservices</name>
+        <value>subCluster01,subCluster02,rfdCluster</value>
+    </property>
+    <property>
+        <name>dfs.ha.namenodes.subCluster01</name>
+        <value>nn1,nn2</value>
+    </property>
+    <property>
+        <name>dfs.ha.namenodes.subCluster02</name>
+        <value>nn3,nn4</value>
+    </property>
+
+<!--映射namenode逻辑名称到真实主机名称(RPC) subCluster01 -->
+<property>
+  <name>dfs.namenode.rpc-address.subCluster01.nn1</name>
+  <value>hadoop102:8020</value>
+</property>
+<property>
+  <name>dfs.namenode.rpc-address.subCluster01.nn2</name>
+  <value>hadoop103:8020</value>
+</property>
+
+<!--映射namenode逻辑名称到真实主机名称(RPC) subCluster02 -->
+<property>
+  <name>dfs.namenode.rpc-address.subCluster02.nn3</name>
+  <value>hadoop104:8020</value>
+</property>
+<property>
+  <name>dfs.namenode.rpc-address.subCluster02.nn4</name>
+  <value>hadoop105:8020</value>
+</property>
+
+<!--映射namenode逻辑名称到真实主机名称(HTTP) subCluster01-->
+<property>
+  <name>dfs.namenode.http-address.subCluster01.nn1</name>
+  <value>hadoop102:50070</value>
+</property>
+<property>
+  <name>dfs.namenode.http-address.subCluster01.nn2</name>
+  <value>hadoop103:50070</value>
+</property>
+
+<!--映射namenode逻辑名称到真实主机名称(HTTP) subCluster02-->
+<property>
+  <name>dfs.namenode.http-address.subCluster02.nn3</name>
+  <value>hadoop104:50070</value>
+</property>
+<property>
+  <name>dfs.namenode.http-address.subCluster02.nn4</name>
+  <value>hadoop105:50070</value>
+</property>    
+
+<!-- 映射service-rpc的相关端口 -->
+<property>
+    <name>dfs.namenode.servicerpc-address.subCluster01.nn1</name>
+    <value>hadoop102:8021</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address.subCluster01.nn2</name>
+    <value>hadoop103:8021</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address.subCluster02.nn3</name>
+    <value>hadoop104:8021</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address.subCluster02.nn4</name>
+    <value>hadoop105:8021</value>
+  </property>
+ 
+
+<!--配置故障切换实现类-->
+  <property>
+    <name>dfs.ha.automatic-failover.enabled</name>
+    <value>true</value>
+  </property>
+<property>
+  <name>dfs.client.failover.proxy.provider.subCluster01</name>
+<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+<property>
+  <name>dfs.client.failover.proxy.provider.subCluster02</name>
+<value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+</property>
+  <property>
+    <name>dfs.domain.socket.path</name>
+    <value>/var/lib/hadoop-hdfs/dn_socket</value>
+  </property>
+ 
+
+<!-- router 的相关配置内容 -->
+<property>
+    <name>dfs.client.federation.router.enable</name>
+    <value>true</value>
+  </property>
+ <property>
+    <name>dfs.client.federation.router.ns</name>
+    <value>rfdCluster</value>
+  </property>
+ 
+   <property>
+    <name>dfs.ha.namenodes.rfdCluster</name>
+    <value>r1,r2</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.rfdCluster.r1</name>
+    <value>hadoop101:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address.rfdCluster.r1</name>
+    <value>hadoop101:8111</value>
+  </property>
+  <property>
+    <name>dfs.namenode.rpc-address.rfdCluster.r2</name>
+    <value>hadoop106:8888</value>
+  </property>
+  <property>
+    <name>dfs.namenode.servicerpc-address.rfdCluster.r2</name>
+    <value>hadoop106:8111</value>
+  </property>
+ 
+  <property>
+    <name>dfs.client.failover.proxy.provider.rfdCluster</name>
+    <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+  </property>
+ 
+  <property>
+    <name>dfs.federation.router.monitor.localnamenode.enable</name>
+    <value>false</value>
+  </property>
+ 
+<property>
+    <name>dfs.federation.router.default.nameserviceId</name>
+    <value>subCluster01</value>
+  </property>
+<property>
+    <name>dfs.federation.router.default.nameserviceId.write.enable</name>
+    <value>false</value>
+  </property>
+ 
+<property>
+    <name>dfs.federation.router.quota.enable</name>
+    <value>false</value>
+  </property>
+
+  <property>
+    <name>dfs.client.failover.random.order</name>
+    <value>true</value>
+  </property>
+  <property>
+    <name>dfs.federation.router.admin.enable</name>
+    <value>true</value>
+  </property>
+
+   <property>
+    <name>var.host</name>
+    <value>0.0.0.0</value>
+  </property>
+ 
+  <property>
+    <name>dfs.federation.router.admin-address</name>
+    <value>${var.host}:8111</value>
+  </property>
+  <property>
+    <name>dfs.federation.router.rpc-address</name>
+    <value>${var.host}:8888</value>
+  </property>
+  <property>
+    <name>dfs.federation.router.http-address</name>
+    <value>${var.host}:50071</value>
+  </property>
+  <property>
+    <name>dfs.federation.router.https-address</name>
+    <value>${var.host}:50072</value>
+  </property>
+ </configuration>
