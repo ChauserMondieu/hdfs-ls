@@ -43,7 +43,7 @@ public class HdfsLs{
 
         // then decides which mode to choose
         System.out.println("then input one param indicate mode, " +
-                "1 for diff, 2 for auth;");
+                "1 for diff, 2 for auth, 3 for diff with root, 4 for diff to leaf;");
         int flag = scanner.nextInt();
         scanner.nextLine();
 
@@ -87,6 +87,40 @@ public class HdfsLs{
                     hdfsDiff.authModify(data.getSrc(), data.getDest());
                 }
                 break;
+            case 3:
+                System.out.println("please input 1 param, " +
+                        "which is the file contains [ src dst ] ");
+                // first make sure input is valid
+                inputStr = scanner.nextLine();
+                inputStrs = inputStr.split("\\s+");
+                if (inputStrs.length < 1 || inputStrs.length > 2) {
+                    System.err.println("invalid inputs, number of inputs should be exact 1");
+                }
+                path = inputStrs[0];
+                hdfsDiff = new HdfsLs();
+                hdfsDiff.getConf();
+                List<Data> list3 = hdfsDiff.infos(path);
+                for (Data data : list3) {
+                    hdfsDiff.lsWithRoot(data.getSrc(), data.getDest());
+                }
+                break;
+            case 4:
+                System.out.println("please input 1 param, " +
+                        "which is the file contains [ src dst ] ");
+                // first make sure input is valid
+                inputStr = scanner.nextLine();
+                inputStrs = inputStr.split("\\s+");
+                if (inputStrs.length < 1 || inputStrs.length > 2) {
+                    System.err.println("invalid inputs, number of inputs should be exact 1");
+                }
+                path = inputStrs[0];
+                hdfsDiff = new HdfsLs();
+                hdfsDiff.getConf();
+                List<Data> list4 = hdfsDiff.infos(path);
+                for (Data data : list4) {
+                    hdfsDiff.lsToLeaf(data.getSrc(), data.getDest());
+                }
+                break;
             default:
                 break;
         }
@@ -126,6 +160,96 @@ public class HdfsLs{
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Error|" + srcPath);
+        }
+    }
+
+    /**
+     * switch 3
+     * make sure diff function
+     * all outputs are exported into files, and errors into console
+     * note: sole difference is that root file would be exported into output file
+     * @param srcPath
+     * @param dstPath
+     */
+    public void lsWithRoot(String srcPath, String dstPath) {
+        try {
+            // first get root path file status
+            FileSystem fs = new Path(srcPath).getFileSystem(conf);
+            FileStatus fileStatus = fs.getFileStatus(new Path(srcPath));
+            if(fileStatus != null){
+                if(fileStatus.isDirectory()){
+                    String line = fileStatus.getPath().toString() + " "
+                            + new Path(dstPath).toUri().getScheme()
+                            + "://" + new Path(dstPath).toUri().getAuthority()
+                            + fileStatus.getPath().toUri().getRawPath();
+                    // write into output file
+                    logutil.writelog(line);
+                }
+            }
+            // iteration through each sub directory
+            lsSubRecursively(srcPath, dstPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error|" + srcPath);
+        }
+    }
+
+    /**
+     * switch 4
+     * make sure diff function
+     * all outputs are exported into files, and errors into console
+     * export all leaves file path
+     * @param srcPath src path for exapmle nmg
+     * @param dstPath dst path for example wh
+     */
+    public void lsToLeaf(String srcPath, String dstPath) {
+        try {
+            // iteration through each sub directory
+            lsSubToLeaf(srcPath, dstPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error|" + srcPath);
+        }
+    }
+
+    /**
+     * switch 4
+     * used for recursively iterate files under one root file
+     * in this function, we only iterate srcpath, and just append relative path of each file after dstpath
+     * then if current directory has child directory, not exporting it to output file
+     * @param path
+     */
+    private void lsSubToLeaf(String path, String dstPath) throws IOException, IllegalArgumentException {
+        try {
+            // instantiate only one writer for writing into output file
+            FileSystem fs = new Path(path).getFileSystem(conf);
+            FileStatus[] fileStatus = fs.listStatus(new Path(path));
+            boolean flag = true;
+            if (null != fileStatus && fileStatus.length > 0) {
+                for (FileStatus item : fileStatus) {
+                    if (item.isDirectory()) {
+                        FileStatus[] fileStatuses = fs.listStatus(item.getPath());
+                        for(FileStatus sub: fileStatuses){
+                            if(sub.isDirectory()){
+                                flag = false;
+                            }
+                        }
+                        if(flag){
+                            String line = item.getPath().toString() + " "
+                                    + new Path(dstPath).toUri().getScheme()
+                                    + "://" + new Path(dstPath).toUri().getAuthority()
+                                    + item.getPath().toUri().getRawPath();
+                            // write into output file
+                            logutil.writelog(line);
+                        }
+                        // list recursively
+                        lsSubToLeaf(item.getPath().toString(), dstPath);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error| " + path + " " + dstPath);
         }
     }
 
