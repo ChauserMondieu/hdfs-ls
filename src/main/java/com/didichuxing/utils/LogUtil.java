@@ -9,26 +9,26 @@ public class LogUtil {
 
     private static FileWriter fw;
     private static BufferedWriter bw;
+    
+    public static LogUtil getLogUtil(String logPath){
+        return new LogUtil(logPath);
+    }
 
     /**
      * get singleton bufferedWriter
-     * @param logpath log path
+     * @param logPath log path
      * @return bw
      */
-    public LogUtil(String logpath) {
-        if (null == bw) {
-            synchronized (this) {
-                if (null == bw) {
-                    try {
-                        fw = new FileWriter(logpath,true);
-                        bw = new BufferedWriter(fw);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
+    private LogUtil(String logPath){
+        try {
+            fw = new FileWriter(logPath,true);
+            bw = new BufferedWriter(fw);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+
 
     /**
      * self-defined log function
@@ -47,7 +47,7 @@ public class LogUtil {
     /**
      * close write stream
      */
-    public void close() {
+    public static void close() {
         if (null != fw) {
             try {
                 fw.close();
