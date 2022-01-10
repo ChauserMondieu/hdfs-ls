@@ -1,8 +1,9 @@
-package com.didichuxing.utils;
+package com.didichuxing;
 
 import com.didichuxing.algo.AlgoTemplate;
 import com.didichuxing.conf.HdfsFactory;
 import com.didichuxing.pojo.Data;
+import com.didichuxing.utils.LogUtil;
 import com.google.common.collect.Lists;
 
 

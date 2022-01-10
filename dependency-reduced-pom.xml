@@ -45,7 +45,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>com.didichuxing.utils.HdfsLs</mainClass>
+                  <mainClass>com.didichuxing.HdfsLs</mainClass>
                 </transformer>
               </transformers>
             </configuration>
